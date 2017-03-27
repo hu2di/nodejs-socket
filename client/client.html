@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<script src="http://127.0.0.1:8080/socket.io/socket.io.js"></script>
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script>
+			$(document).ready(function (){
+				var socket = io.connect('http://127.0.0.1:8080');
+				socket.on('access', function (data){
+					alert(data);
+				});
+				$('#go').click(function (){
+					socket.emit('user-join', $('#name').val());
+				});
+				socket.on('new-user', function (data) {
+					alert(data);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<h1>What is your name?</h1>
+		<input type="text" id="name"/>
+		<button id="go">Go</button>
+	</body>
+</html>
